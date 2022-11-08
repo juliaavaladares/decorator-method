@@ -1,34 +1,16 @@
 package main;
 
-import main.PizzaRecheioDecorator.TamanhoPizza;
-
-public class QuatroQueijos implements Pizza {
+public class QuatroQueijos extends PizzaRecheioDecorator {
 
     public TamanhoPizza tamanhoPizza;
     public boolean borda;
     
 
-    public QuatroQueijos(String tamanhoPizza, boolean borda) {
-        this.tamanhoPizza = TamanhoPizza.valueOf(tamanhoPizza);
+    public QuatroQueijos(Pizza pizza, TamanhoPizza tamanhoPizza, boolean borda) {
+        super(pizza);
+        this.tamanhoPizza = tamanhoPizza;
         this.borda = borda;
     }
-
-
-    @Override
-    public float getPrecoPizza() {
-        switch (tamanhoPizza) {
-            case PEQUENA:
-                return (float) 25.99;
-            case MEDIA:
-                return (float) 45.99;
-            case GRANDE: 
-                return (float) 65.99;
-            default:
-                return (float) 45.99;
-        }
-        
-    }
-
 
     public TamanhoPizza getTamanhoPizza() {
         return tamanhoPizza;
@@ -47,6 +29,21 @@ public class QuatroQueijos implements Pizza {
 
     public void setBorda(boolean borda) {
         this.borda = borda;
+    }
+
+
+    @Override
+    public float getPrecoFinalPizza() {
+        switch (tamanhoPizza) {
+            case PEQUENA:
+                return (float) 25.99;
+            case MEDIA:
+                return (float) 45.99;
+            case GRANDE: 
+                return (float) 65.99;
+            default:
+                return (float) 45.99;
+        }
     }
 
 }

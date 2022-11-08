@@ -1,35 +1,17 @@
 
 package main;
 
-import main.PizzaRecheioDecorator.TamanhoPizza;
-
-public class FrangoComCatupiry implements Pizza {
+public class FrangoComCatupiry extends PizzaRecheioDecorator {
 
     public TamanhoPizza tamanhoPizza;
     public boolean borda;
     
 
-    public FrangoComCatupiry(String tamanhoPizza, boolean borda) {
+    public FrangoComCatupiry(Pizza pizza, String tamanhoPizza, boolean borda) {
+        super(pizza);
         this.tamanhoPizza = TamanhoPizza.valueOf(tamanhoPizza);
         this.borda = borda;
     }
-
-
-    @Override
-    public float getPrecoPizza() {
-        switch (tamanhoPizza) {
-            case PEQUENA:
-                return (float) 35.99;
-            case MEDIA:
-                return (float) 55.99;
-            case GRANDE: 
-                return (float) 75.99;
-            default:
-                return (float) 55.99;
-        }
-        
-    }
-
 
     public TamanhoPizza getTamanhoPizza() {
         return tamanhoPizza;
@@ -48,6 +30,30 @@ public class FrangoComCatupiry implements Pizza {
 
     public void setBorda(boolean borda) {
         this.borda = borda;
+    }
+
+
+    @Override
+    public float getPrecoFinalPizza() {
+        float precoFinal;
+        switch (tamanhoPizza) {
+            case PEQUENA:
+                precoFinal = (float) 35.99;
+            case MEDIA:
+                precoFinal = (float) 55.99;
+            case GRANDE: 
+                precoFinal = (float) 75.99;
+            default:
+                precoFinal = (float) 0.0;
+        }
+
+        if (borda) {
+            precoFinal = (float) (precoFinal * 1.2);
+        }
+
+        return precoFinal;
+
+
     }
 
 }

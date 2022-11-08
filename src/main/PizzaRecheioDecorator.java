@@ -34,11 +34,7 @@ public abstract class PizzaRecheioDecorator implements Pizza{
     public abstract float getPrecoFinalPizza();
 
     public float getPrecoPizza(){
-        if (borda) {
-            return (float) (this.pizza.getPrecoPizza() * 1.2);
-        }
-
-        return (float) (this.pizza.getPrecoPizza());
+        return (float) (this.getPrecoFinalPizza());
         
     }
     
